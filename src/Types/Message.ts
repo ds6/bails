@@ -115,6 +115,8 @@ export type PollMessageOptions = {
   values: string[];
   /** 32 byte message secret to encrypt poll selections */
   messageSecret?: Uint8Array;
+  mentions?: any;
+  remoteJid?: string;
 };
 
 type SharePhoneNumber = {
