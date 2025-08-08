@@ -1,6 +1,6 @@
 {
   "name": "baileys",
-  "version": "6.9.25",
+  "version": "6.9.26",
   "description": "A WebSockets library for interacting with WhatsApp Web",
   "keywords": [
     "whatsapp",
