@@ -1,44 +1,53 @@
-<h1><img alt="Baileys logo" src="https://raw.githubusercontent.com/WhiskeySockets/Baileys/refs/heads/master/Media/logo.png" height="75"/></h1>
+# 🔄 Migration Guide: From `bails` to `buils` (Compatible with Baileys 7.x – ESM Only)
 
-![NPM Downloads](https://img.shields.io/npm/dw/%40whiskeysockets%2Fbaileys?label=npm&color=%23CB3837)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/whiskeysockets/baileys)
-![Discord](https://img.shields.io/discord/725839806084546610?label=discord&color=%235865F2)
+WhatsApp has recently introduced important internal changes, including new WhatsApp Web versions and protocol updates.  
+Because of these changes, if you are still using the **bails** repository, it is strongly recommended to migrate to **buils**, which already includes support for the latest **Baileys 7.x** version.
 
-Baileys is a WebSockets-based TypeScript library for interacting with the WhatsApp Web API.
+---
 
-# Usage
-A new guide has been posted at https://baileys.wiki.
+## 🔗 Repository Links
 
-# Sponsor
-If you'd like to financially support this project, you can do so by supporting the current maintainer [here](https://purpshell.dev/sponsor).
+| Project | URL |
+|--------|-----|
+| 📁 Old repository (`bails`) | https://github.com/ds6/bails |
+| 📁 New recommended repository (`buils`) | https://github.com/ds6/buils |
 
-# Disclaimer
-This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with WhatsApp or any of its subsidiaries or its affiliates.
-The official WhatsApp website can be found at whatsapp.com. "WhatsApp" as well as related names, marks, emblems and images are registered trademarks of their respective owners.
+The **buils** repository is fully prepared for modern Baileys usage and WhatsApp's recent updates.
 
-The maintainers of Baileys do not in any way condone the use of this application in practices that violate the Terms of Service of WhatsApp. The maintainers of this application call upon the personal responsibility of its users to use this application in a fair way, as it is intended to be used.
-Use at your own discretion. Do not spam people with this. We discourage any stalkerware, bulk or automated messaging usage.
+---
 
-# License
-Copyright (c) 2025 Rajeh Taher/WhiskeySockets
+## 📌 Important Changes in Baileys 7.x
 
-Licensed under the MIT License:
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Baileys is now **100% ESM Only**, which means:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+- You can no longer use `require()` directly.
+- If your environment is CommonJS (CJS), you must import the default export manually.
+- If your environment is ESM, you do **not** use `.default`.
+- The import structure has been updated and expanded.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+---
 
-Thus, the maintainers of the project can't be held liable for any potential misuse of this project.
+## 🟨 Using Baileys in CommonJS (CJS)
+
+Because Baileys 7.x is ESM Only, the correct way to import it in CJS is:
+
+```js
+const baileys = require('@whiskeysockets/baileys').default;
+
+const {
+    makeWASocket,
+    fetchLatestBaileysVersion,
+    DisconnectReason
+} = baileys;
+```
+
+## 🟦 Using Baileys in ESM (Recommended)
+If your project uses ESM (for example "type": "module" in package.json), the correct and updated import format is:
+
+```js
+import {
+    makeWASocket,
+    fetchLatestBaileysVersion,
+    DisconnectReason
+} from '@whiskeysockets/baileys';
+```
